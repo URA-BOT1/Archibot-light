@@ -1,17 +1,25 @@
 from fastapi.testclient import TestClient
-from backend.main import app
+from backend.app.main import app, vector_db
 
-client = TestClient(app)
+
+def create_client():
+    """Create a TestClient ensuring startup events run."""
+    return TestClient(app)
 
 def test_health():
-    response = client.get("/health")
-    assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    """Health endpoint should load documents on startup."""
+    with create_client() as client:
+        response = client.get("/health")
+        assert response.status_code == 200
+        assert response.json() == {"status": "ok"}
+        assert vector_db.count_documents() > 0
 
 def test_chat():
-    payload = {"message": "hello"}
-    response = client.post("/chat", json=payload)
-    assert response.status_code == 200
-    data = response.json()
-    assert "reply" in data
-    assert data["reply"] == f"Echo: {payload['message']}"
+    """/chat should return a response string and search results."""
+    with create_client() as client:
+        payload = {"message": "hello"}
+        response = client.post("/chat", json=payload)
+        assert response.status_code == 200
+        data = response.json()
+        assert "response" in data
+        assert isinstance(data.get("results"), list)
