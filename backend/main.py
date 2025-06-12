@@ -6,14 +6,12 @@ from pathlib import Path
 
 from backend.services.llm import RobustLLMClient
 from backend.services.embedding import load_embedding_model
-from backend.services.redis_client import get_redis_client
 from backend.services.vector_store import LightVectorDB
 
 app = FastAPI()
 
 llm_client = RobustLLMClient()
 embedding_model = load_embedding_model()
-redis_client = get_redis_client()
 vector_db = LightVectorDB()
 
 
