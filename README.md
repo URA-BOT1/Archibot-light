@@ -22,7 +22,7 @@ Capable d'ingérer vos documents et de répondre à vos questions grâce à un s
 - **Builder** : `Nixpacks` *(ou Railway Build bêta)*
 - **Build command** :
   ```bash
-  pip install -r backend/requirements.txt
+  pip install -r requirements.txt
 Start command :
 
 bash
