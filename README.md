@@ -12,10 +12,11 @@ pip install -r requirements.txt
 Running the Backend
 Start the FastAPI server with Uvicorn:
 ```bash
-uvicorn backend.main:app --reload
+uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080}
 ```
-This command launches the ASGI server and imports the app from backend/main.py.
-The --reload option enables auto-reload on file changes.
+This command binds the server to all network interfaces and reads the port
+from the `PORT` environment variable (default `8080`). Add `--reload` during
+development to enable auto-reload of code changes.
 
 By default the backend uses OpenAI for language generation. If the
 `OPENAI_API_KEY` variable is missing, it will try Groq first and then
@@ -66,7 +67,7 @@ Environment Variables
 The application relies on several environment variables when deployed.
 An example configuration is provided in `.env.example`.
 
-PORT – port for the server (default: 8000)
+PORT – port for the server (default: 8080)
 
 OPENAI_API_KEY – API key for OpenAI
 
@@ -82,17 +83,17 @@ Set these variables in your Railway project or local environment using a `.env` 
 Deployment on Railway
 ---------------------
 
-The project can be deployed on [Railway](https://railway.app) using its
-Nixpacks builder. The included `railway.toml` configures the build and
-start command:
+The project can be deployed on [Railway](https://railway.app) using the
+Nixpacks builder.
 
-```toml
-[build]
-  builder = "Nixpacks"
+1. Install the Railway CLI: `npm i -g @railway/cli`
+2. Run `railway init` in the repository to create a project.
+3. Configure your environment variables in Railway.
+4. Deploy with:
 
-[deploy]
-  startCommand = "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
-```
+   ```bash
+   railway up
+   ```
 
-Running `railway up` will build the service with Nixpacks and launch the
-API on the port provided by Railway.
+The included `railway.toml` ensures Nixpacks builds the app and starts it with
+`uvicorn backend.main:app --host 0.0.0.0 --port $PORT`.
