@@ -32,3 +32,10 @@ def test_chat():
             assert "text" in data["results"][0]
             assert "score" in data["results"][0]
 
+
+def test_no_redis_client_variable():
+    """Ensure redis_client variable has been removed from backend.main."""
+    import importlib
+    main = importlib.import_module("backend.main")
+    assert not hasattr(main, "redis_client")
+

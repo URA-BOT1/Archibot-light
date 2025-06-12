@@ -53,8 +53,6 @@ An example configuration is provided in `.env.example`.
 
 PORT – port for the server (default: 8000)
 
-REDIS_URL – address of the Redis instance used by the backend
-
 OPENAI_API_KEY – API key for optional OpenAI integration
 
 GROQ_API_KEY, TOGETHER_API_KEY – for external LLMs
