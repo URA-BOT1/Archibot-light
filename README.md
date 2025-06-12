@@ -15,7 +15,7 @@ instructions for running the project locally and deploying it to the cloud.
 2. **Install dependencies**
 
    ```bash
-   npm install
+   ./install.sh
    ```
 
 3. **Create a `.env` file** with the required environment variables. Common
@@ -29,13 +29,15 @@ instructions for running the project locally and deploying it to the cloud.
 4. **Run the backend locally**
 
    ```bash
-   npm run dev
+   ./run.sh
    ```
 
-   Once running, you can check the health endpoint:
+   The script will start a local Redis instance if `redis-server` is available
+   and then launch the API with Uvicorn. Once running, you can check the health
+   endpoint:
 
    ```bash
-   curl http://localhost:3000/health
+   curl http://localhost:8000/health
    ```
 
 ## Deploying the Backend to Railway
