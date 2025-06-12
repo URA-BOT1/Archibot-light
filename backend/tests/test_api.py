@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from backend.app.main import app, vector_db
+from backend.main import app, vector_db
 
 
 def create_client():
