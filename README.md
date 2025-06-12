@@ -32,7 +32,6 @@ uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 🔐 Variables d’environnement à définir
 Clé	Exemple / Source
 PORT	8000 (géré automatiquement par Railway)
-REDIS_URL	redis://:<pass>@<host>.railway.internal:6379 (via Redis > Settings)
 GROQ_API_KEY	(facultatif, pour moteur Groq)
 OPENAI_API_KEY	(facultatif, pour moteur OpenAI)
 TOGETHER_API_KEY	(optionnel)
