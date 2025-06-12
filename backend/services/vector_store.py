@@ -35,6 +35,15 @@ class LightVectorDB:
         finally:
             conn.close()
 
+    def count_documents(self) -> int:
+        """Return the number of stored documents."""
+        conn = sqlite3.connect(self.db_path)
+        try:
+            cursor = conn.execute("SELECT COUNT(*) FROM documents")
+            return cursor.fetchone()[0]
+        finally:
+            conn.close()
+
     def _cosine_similarity(self, a: List[float], b: List[float]) -> float:
         dot = sum(x * y for x, y in zip(a, b))
         norm_a = math.sqrt(sum(x * x for x in a))
