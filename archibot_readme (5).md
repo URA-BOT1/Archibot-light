@@ -1,0 +1,272 @@
+# 🏗️ Archibot-light
+
+<div align="center">
+  <img src="https://via.placeholder.com/600x300/4F46E5/FFFFFF?text=🤖+Archibot-light" alt="Archibot Banner" />
+  
+  **Assistant IA spécialisé en architecture et urbanisme**
+  
+  [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template)
+  ![Status](https://img.shields.io/badge/status-ready-brightgreen)
+  ![Version](https://img.shields.io/badge/version-1.0-blue)
+</div>
+
+---
+
+## 🚀 **Démarrage ultra-rapide** *(2 minutes chrono)*
+
+### 1️⃣ **Cliquez** ➡️ [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template)
+
+### 2️⃣ **Import GitHub**
+- Sélectionnez "Deploy from GitHub repo"
+- Connectez votre compte GitHub
+- Choisissez ce repo : `archibot-light`
+
+### 3️⃣ **Configuration**
+Allez dans **Settings** > **Environment**
+
+| Variable | Valeur | Où la trouver |
+|----------|--------|---------------|
+| `OPENAI_API_KEY` | `sk-xxx...` | [platform.openai.com](https://platform.openai.com/api-keys) |
+| `GROQ_API_KEY` | `gsk_xxx...` | [console.groq.com](https://console.groq.com) *(optionnel)* |
+
+### 4️⃣ **Deploy**
+- Cliquez "Deploy"
+- Attendez 2-3 minutes ⏱️
+- Railway génère votre URL automatiquement
+
+### 5️⃣ **Testez**
+```
+🌐 Ouvrez : https://votre-app.railway.app
+💬 Posez votre question !
+```
+
+### 4️⃣ **Exemples de questions**
+<div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+
+💡 **"Quelle hauteur maximale en zone urbaine ?"**  
+🏠 **"Comment calculer un coefficient d'occupation des sols ?"**  
+📋 **"Règles PLU pour une extension de maison ?"**  
+🏗️ **"Distance minimale entre deux bâtiments ?"**
+
+</div>
+
+---
+
+## 🎯 **C'est quoi Archibot ?**
+
+<table>
+<tr>
+<td width="50%">
+
+### ✨ **Pour qui ?**
+- 👨‍💼 **Architectes** 
+- 🏙️ **Urbanistes**
+- 🎓 **Étudiants**
+- 🏢 **Bureaux d'études**
+
+</td>
+<td width="50%">
+
+### 🔥 **Pourquoi ?**
+- ⚡ **Réponses instantanées**
+- 📚 **Connaissance réglementaire**
+- 🎯 **Spécialisé architecture**
+- 🆓 **Gratuit et open-source**
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎨 **Aperçu de l'interface**
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400/E5E7EB/374151?text=💬+Interface+Chat+Moderne" alt="Interface Screenshot" />
+  <p><em>Interface simple et intuitive pour poser vos questions</em></p>
+</div>
+
+---
+
+<details>
+<summary><h2>🔧 **Documentation technique** <em>(cliquez pour développer)</em></h2></summary>
+
+## ⚙️ **Architecture technique**
+
+```mermaid
+graph TD
+    A[👤 Utilisateur] --> B[🌐 Interface Web]
+    B --> C[🚀 FastAPI Backend]
+    C --> D[🧠 LLM Engine]
+    C --> E[💾 Redis Cache]
+    D --> F[📚 Documents RAG]
+```
+
+## 📋 **Prérequis**
+
+- **Python 3.8+**
+- **Redis** (pour le cache)
+- **Clé API** (OpenAI, Groq, ou Together)
+
+## 🛠️ **Installation locale**
+
+```bash
+# 1. Cloner le projet
+git clone https://github.com/votre-username/archibot-light.git
+cd archibot-light
+
+# 2. Installer les dépendances
+pip install -r requirements.txt
+
+# 3. Variables d'environnement
+export OPENAI_API_KEY="votre-cle-api"
+export GROQ_API_KEY="votre-cle-groq"
+
+# 4. Lancer le serveur
+uvicorn backend.main:app --reload
+```
+
+## 🌐 **Configuration Railway**
+
+### Variables d'environnement
+
+| Variable | Description | Requis | Exemple |
+|----------|-------------|---------|---------|
+| `PORT` | Port du serveur | ❌ | `8000` |
+| `OPENAI_API_KEY` | Clé API OpenAI | ✅ | `sk-...` |
+| `GROQ_API_KEY` | Clé API Groq | ⚠️ | `gsk_...` |
+| `TOGETHER_API_KEY` | Clé API Together | ⚠️ | `...` |
+| `REDIS_URL` | URL Redis | ❌ | Auto |
+
+### Commandes de build
+
+```yaml
+# Build Command
+pip install -r requirements.txt
+
+# Start Command  
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+```
+
+## 🧪 **Tests des endpoints**
+
+### Test de santé
+```bash
+curl https://votre-app.railway.app/health
+# Réponse: {"status": "ok"}
+```
+
+### Test du chat
+```bash
+curl -X POST https://votre-app.railway.app/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Quelle est la hauteur maximale autorisée en zone urbaine ?"
+  }'
+```
+
+## 📁 **Structure du projet**
+
+```
+archibot-light/
+├── 📁 backend/
+│   ├── 🐍 main.py              # Application FastAPI
+│   ├── 📋 requirements.txt     # Dépendances Python
+│   ├── 📁 models/             # Modèles de données
+│   ├── 📁 services/           # Services métier
+│   └── 📁 utils/              # Utilitaires
+├── 📁 frontend/
+│   ├── 🌐 index.html          # Interface web
+│   ├── 🎨 style.css           # Styles
+│   └── ⚡ script.js           # JavaScript
+├── 📁 docs/
+│   └── 📖 api.md              # Documentation API
+├── 📁 tests/
+│   └── 🧪 test_api.py         # Tests unitaires
+└── 📄 README.md
+```
+
+## 🔌 **API Reference**
+
+### POST `/chat`
+```json
+{
+  "prompt": "Votre question",
+  "context": "Contexte optionnel",
+  "model": "gpt-4" // optionnel
+}
+```
+
+**Réponse :**
+```json
+{
+  "response": "Réponse du chatbot",
+  "sources": ["source1", "source2"],
+  "confidence": 0.95
+}
+```
+
+### GET `/health`
+```json
+{
+  "status": "ok",
+  "version": "1.0.0",
+  "uptime": "2h 15m"
+}
+```
+
+## 🔄 **Système RAG**
+
+Le système utilise :
+- **🔍 Recherche vectorielle** pour trouver les documents pertinents
+- **🧠 LLM** pour générer une réponse contextuelle
+- **💾 Cache Redis** pour optimiser les performances
+
+## 🚧 **Roadmap**
+
+- [ ] 📤 **Upload de fichiers PDF**
+- [ ] 🔍 **Vectorisation avancée**
+- [ ] 🔐 **Authentification utilisateur**
+- [ ] 📊 **Dashboard analytics**
+- [ ] 🌍 **Support multilingue**
+- [ ] 📱 **App mobile**
+
+</details>
+
+---
+
+## 🤝 **Contribution**
+
+<div align="center">
+
+**Envie d'améliorer Archibot ?**
+
+<a href="https://github.com/votre-username/archibot-light/fork">
+  <img src="https://img.shields.io/badge/Fork-le%20projet-blue?style=for-the-badge&logo=github" />
+</a>
+<a href="https://github.com/votre-username/archibot-light/issues">
+  <img src="https://img.shields.io/badge/Signaler-un%20bug-red?style=for-the-badge&logo=github" />
+</a>
+
+</div>
+
+## 📞 **Support & Contact**
+
+<div align="center">
+
+| 🐛 **Bug** | 💡 **Idée** | 💬 **Chat** |
+|------------|-------------|-------------|
+| [GitHub Issues](https://github.com/votre-username/archibot-light/issues) | [Discussions](https://github.com/votre-username/archibot-light/discussions) | [Discord](https://discord.gg/votre-serveur) |
+
+📧 **Email :** votre-email@example.com
+
+</div>
+
+---
+
+<div align="center">
+  <p>Fait avec ❤️ pour la communauté architecture & tech</p>
+  
+  ![GitHub stars](https://img.shields.io/github/stars/votre-username/archibot-light?style=social)
+  ![GitHub forks](https://img.shields.io/github/forks/votre-username/archibot-light?style=social)
+</div>
