@@ -46,4 +46,16 @@ tutorialspoint.com
 .
 
 ## Frontend
-Pour utiliser l'interface web simplifiee, ouvrez `frontend/index.html` dans votre navigateur une fois le serveur demarre.
+
+Une interface web simple est fournie dans le dossier `frontend`.
+
+Vous avez deux options :
+
+1. **Ouvrir `frontend/index.html` directement dans votre navigateur** une fois le backend lancé.
+
+2. **Servir l’interface avec FastAPI** en ajoutant ceci dans votre code backend :
+
+```python
+from fastapi.staticfiles import StaticFiles
+app.mount('/', StaticFiles(directory='frontend', html=True), name='static')
+

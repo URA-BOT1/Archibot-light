@@ -13,5 +13,10 @@ def test_chat():
     response = client.post("/chat", json=payload)
     assert response.status_code == 200
     data = response.json()
-    assert "reply" in data
-    assert data["reply"] == f"Echo: {payload['message']}"
+    assert "response" in data
+    assert isinstance(data["response"], str)
+    assert "results" in data
+    assert isinstance(data["results"], list)
+    if data["results"]:
+        assert "text" in data["results"][0]
+        assert "score" in data["results"][0]
