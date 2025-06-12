@@ -41,6 +41,17 @@ app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
 ```
 Then open http://127.0.0.1:8000 to interact with the /chat endpoint.
 
+If the frontend and backend are deployed separately, set the backend's
+URL for the JavaScript client. Define a `BACKEND_URL` environment
+variable during your build or include a script tag before `app.js` that
+sets `window.BACKEND_URL`:
+
+```html
+<script>
+  window.BACKEND_URL = 'https://your-backend.example.com';
+</script>
+```
+
 Health Check
 You can confirm the backend is running by executing:
 ```bash
@@ -64,5 +75,7 @@ GROQ_API_KEY, TOGETHER_API_KEY – keys for external LLMs
   then Together.ai if their keys are present.
 
 UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstash Redis
+
+BACKEND_URL – base URL for the chat backend when the frontend is served separately
 
 Set these variables in your Railway project or local environment using a `.env` file or by exporting them in your shell.
