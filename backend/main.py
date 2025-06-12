@@ -23,7 +23,9 @@ def _load_initial_embeddings() -> None:
     with open(data_path, "r", encoding="utf-8") as f:
         docs = json.load(f)
     texts = [d.get("content", "") for d in docs]
-    embeddings = [embedding_model(text) for text in texts]
+    # FastEmbed can embed a batch of texts at once
+    embeddings = [emb.tolist() if hasattr(emb, "tolist") else list(emb)
+                  for emb in embedding_model.embed(texts)]
     vector_db.add_documents(texts, embeddings)
 
 
@@ -43,7 +45,9 @@ def health():
 
 @app.post("/chat")
 def chat(req: ChatRequest):
-    query_embedding = embedding_model(req.message)
+    query_embedding = list(embedding_model.embed([req.message]))[0]
+    if hasattr(query_embedding, "tolist"):
+        query_embedding = query_embedding.tolist()
     results = vector_db.similarity_search(query_embedding)
     response = llm_client.generate(req.message)
     return {
