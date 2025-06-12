@@ -65,7 +65,7 @@ pytest
 ```
 Environment Variables
 The application relies on several environment variables when deployed.
-An example configuration is provided in `.env.example`.
+An example configuration is provided in `.env`.
 
 PORT – port for the server (default: 8080)
 
