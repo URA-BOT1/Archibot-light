@@ -28,16 +28,16 @@ Once running:
 
 API available at: http://127.0.0.1:8000
 
-Swagger UI docs: http://127.0.0.1:8000/docs
+Swagger UI docs at: http://127.0.0.1:8000/docs
 
 Frontend Usage
 A simple web interface is provided in the frontend directory.
 
 You can either:
 
-Open frontend/index.html directly in your browser.
+Open frontend/index.html directly in your browser
 
-Serve it via FastAPI with:
+Or serve it via FastAPI with:
 
 python
 Copier
@@ -60,19 +60,19 @@ bash
 Copier
 Modifier
 pytest
-yaml
-Copier
-Modifier
+Environment Variables
+The application relies on several environment variables when deployed.
+An example configuration is provided in .env.example.
 
----
+PORT – port for the server (default: 8080)
 
-### ✅ À faire maintenant :
+REDIS_URL – address of the Redis instance used by the backend
 
-1. Ouvre ton `README.md` (dans GitHub ou Codex)
-2. **Remplace tout par ce contenu**
-3. Puis fais :
+OPENAI_API_KEY – API key for optional OpenAI integration
 
-```bash
-git add README.md
-git commit -m "✅ README.md nettoyé et corrigé"
-git push
+GROQ_API_KEY, TOGETHER_API_KEY – for external LLMs
+
+UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstash Redis
+
+Set these variables in your Railway project or local .env file before deploying.
+
