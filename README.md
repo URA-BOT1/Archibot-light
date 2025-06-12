@@ -79,3 +79,16 @@ UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstas
 BACKEND_URL – base URL for the chat backend when the frontend is served separately
 
 Set these variables in your Railway project or local environment using a `.env` file or by exporting them in your shell.
+
+Deploying to Railway
+--------------------
+This repository now relies on Railway's Nixpacks builder rather than the
+Dockerfile. Deployment installs dependencies from `backend/requirements.txt` and
+executes:
+
+```
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+```
+
+Create a Railway project and run `railway up`. Configure the environment
+variables mentioned above in the Railway dashboard before deploying.
