@@ -22,8 +22,9 @@ Option 2 (pip) : installez manuellement les dépendances avec pip :
 bash
 Copier
 Modifier
-pip install -r requirements.txt
-La commande pip install -r requirements.txt installe toutes les bibliothèques listées dans ce fichier
+pip install -r backend/requirements.txt
+La commande pip install -r backend/requirements.txt installe toutes les bibliothèques listées dans ce fichier.
+Exécutez-la depuis la racine du projet.
 pip.pypa.io
 .
 Exécution
