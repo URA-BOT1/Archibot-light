@@ -1,16 +1,18 @@
+const historyEl = document.getElementById('chat-box'); // ou 'history' selon ton HTML
+
 function appendMessage(text, type) {
-    const box = document.getElementById('chat-box');
     const div = document.createElement('div');
-    div.className = `message ${type}`;
+    div.className = `message ${type}`; // type = 'user' ou 'bot'
     div.textContent = text;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+    historyEl.appendChild(div);
+    historyEl.scrollTop = historyEl.scrollHeight;
 }
 
 async function send() {
     const input = document.getElementById('message');
     const text = input.value.trim();
     if (!text) return;
+
     appendMessage(text, 'user');
     input.value = '';
 
@@ -21,16 +23,16 @@ async function send() {
             body: JSON.stringify({ message: text })
         });
         const data = await res.json();
-        appendMessage(data.reply, 'bot');
+        appendMessage(data.reply || data.response || 'Réponse vide', 'bot');
     } catch (err) {
-        appendMessage('Error sending message', 'bot');
+        appendMessage('Erreur : ' + err.message, 'bot');
     }
 }
 
-document.getElementById('send-btn').addEventListener('click', send);
+// Gestion du bouton d'envoi
+document.getElementById('send-button').addEventListener('click', send);
 
-document.getElementById('message').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        send();
-    }
+// Envoi avec la touche Entrée
+document.getElementById('message').addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') send();
 });

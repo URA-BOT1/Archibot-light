@@ -22,27 +22,29 @@ Copier
 Modifier
 uvicorn backend.main:app --reload
 This command launches the ASGI server and imports the app from backend/main.py.
-The --reload option auto-reloads on file changes.
+The --reload option enables auto-reload on file changes.
 
 Once running:
 
 API available at: http://127.0.0.1:8000
 
-Swagger UI docs at: http://127.0.0.1:8000/docs
+Swagger UI docs: http://127.0.0.1:8000/docs
 
 Frontend Usage
-A simple web interface is provided in the frontend directory. You can either:
+A simple web interface is provided in the frontend directory.
+
+You can either:
 
 Open frontend/index.html directly in your browser.
 
-Or serve it via FastAPI:
+Serve it via FastAPI with:
 
 python
 Copier
 Modifier
 from fastapi.staticfiles import StaticFiles
 app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
-Then open: http://127.0.0.1:8000
+Then open http://127.0.0.1:8000 to interact with the /chat endpoint.
 
 Health Check
 You can confirm the backend is running by executing:
@@ -52,7 +54,7 @@ Copier
 Modifier
 curl http://127.0.0.1:8000/health
 Running Tests
-Execute unit tests with:
+Run unit tests using:
 
 bash
 Copier
@@ -64,8 +66,13 @@ Modifier
 
 ---
 
-Tu peux copier/coller ça dans ton fichier `README.md`, puis :
+### ✅ À faire maintenant :
+
+1. Ouvre ton `README.md` (dans GitHub ou Codex)
+2. **Remplace tout par ce contenu**
+3. Puis fais :
+
 ```bash
 git add README.md
-git commit -m "✅ README.md complet et corrigé"
+git commit -m "✅ README.md nettoyé et corrigé"
 git push
