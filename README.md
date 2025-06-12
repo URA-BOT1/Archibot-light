@@ -15,27 +15,30 @@ instructions for running the project locally and deploying it to the cloud.
 2. **Install dependencies**
 
    ```bash
-   npm install
+   pip install -r requirements.txt
    ```
 
-3. **Create a `.env` file** with the required environment variables. Common
-   variables include:
+3. **Copy `.env.example` to `.env`** and update the values as needed.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Common variables include:
 
    - `DATABASE_URL` &ndash; database connection string
    - `OPENAI_API_KEY` &ndash; API key for OpenAI services
 
-   Adjust these to match your environment.
-
 4. **Run the backend locally**
 
    ```bash
-   npm run dev
+   uvicorn backend.main:app --reload
    ```
 
    Once running, you can check the health endpoint:
 
    ```bash
-   curl http://localhost:3000/health
+   curl http://localhost:8000/health
    ```
 
 ## Deploying the Backend to Railway
@@ -43,7 +46,7 @@ instructions for running the project locally and deploying it to the cloud.
 1. **Install the Railway CLI**
 
    ```bash
-   npm install -g railway
+   pip install railway-cli
    ```
 
 2. **Login and link your project**
@@ -70,7 +73,7 @@ instructions for running the project locally and deploying it to the cloud.
 1. **Install the Vercel CLI**
 
    ```bash
-   npm install -g vercel
+   pip install vercel-cli
    ```
 
 2. **Login and link your project**
@@ -102,4 +105,12 @@ curl https://<your-railway-app>.railway.app/health
 ```
 
 A successful response confirms that the backend is up and responding.
+
+## Running Tests
+
+Execute unit tests with `pytest`:
+
+```bash
+pytest
+```
 
