@@ -8,6 +8,11 @@ function appendMessage(text, type) {
     historyEl.scrollTop = historyEl.scrollHeight;
 }
 
+const backendUrl =
+    (typeof process !== 'undefined' && process.env && process.env.BACKEND_URL) ||
+    window.BACKEND_URL ||
+    '';
+
 async function send() {
     const input = document.getElementById('message');
     const text = input.value.trim();
@@ -17,7 +22,7 @@ async function send() {
     input.value = '';
 
     try {
-        const res = await fetch('/chat', {
+        const res = await fetch(`${backendUrl}/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
