@@ -44,3 +44,17 @@ tutorialspoint.com
 Le serveur écoute par défaut sur 127.0.0.1:8000. Une fois lancé, l’API est accessible sur http://127.0.0.1:8000 et la documentation interactive Swagger est disponible sur http://127.0.0.1:8000/docs
 tutorialspoint.com
 .
+
+## Frontend Usage
+
+A simple web interface is provided in the `frontend` directory. You can open
+`frontend/index.html` directly in your browser, or serve the directory with
+FastAPI's `StaticFiles`:
+
+```python
+from fastapi.staticfiles import StaticFiles
+app.mount('/', StaticFiles(directory='frontend', html=True), name='static')
+```
+
+Start the backend server and visit `http://127.0.0.1:8000` to chat with the
+`/chat` endpoint.
