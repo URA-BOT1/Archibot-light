@@ -1,60 +1,71 @@
 # Archibot-light Setup Guide
 
-Prérequis
-Python 3 (version 3.6 ou supérieure) doit être installé.
-(Optionnel, recommandé) Créez un environnement virtuel Python pour isoler les dépendances du projet. Par exemple :
-bash
-Copier
-Modifier
+## Prerequisites
+* Python 3.6 or higher
+* **Recommended:** create and activate a virtual environment
+
+```bash
 python3 -m venv venv
-source venv/bin/activate   # sous Windows : venv\Scripts\activate
-Le module venv de Python permet de créer un environnement virtuel (commandée de la forme python -m venv <chemin>)
-docs.python.org
-.
+source venv/bin/activate   # on Windows: venv\Scripts\activate
 Installation
-Option 1 (script) : exécutez le script d’installation fourni dans le dépôt :
+Install the dependencies from backend/requirements.txt:
+
 bash
 Copier
 Modifier
-./install.sh
-Ce script installe automatiquement les dépendances nécessaires (via pip).
-Option 2 (pip) : installez manuellement les dépendances avec pip :
-bash
-Copier
-Modifier
-pip install -r requirements.txt
-La commande pip install -r requirements.txt installe toutes les bibliothèques listées dans ce fichier
-pip.pypa.io
-.
-Exécution
-Option 1 (script) : lancez le script d’exécution :
-bash
-Copier
-Modifier
-./run.sh
-Ce script démarre le serveur web (il utilise généralement Uvicorn en arrière-plan).
-Option 2 (Uvicorn) : démarrez manuellement le serveur FastAPI avec Uvicorn :
+pip install -r backend/requirements.txt
+Running the Backend
+Start the FastAPI server with Uvicorn:
+
 bash
 Copier
 Modifier
 uvicorn backend.main:app --reload
-Cette commande lance le serveur ASGI en important l’application depuis backend/main.py. L’option --reload active le rechargement automatique du code en cas de modifications. Ce mode de lancement correspond à l’exemple documenté (uvicorn main:app --reload) dans la documentation FastAPI
-tutorialspoint.com
-.
-Le serveur écoute par défaut sur 127.0.0.1:8000. Une fois lancé, l’API est accessible sur http://127.0.0.1:8000 et la documentation interactive Swagger est disponible sur http://127.0.0.1:8000/docs
-tutorialspoint.com
-.
+This command launches the ASGI server and imports the app from backend/main.py.
+The --reload option auto-reloads on file changes.
 
-## Frontend Usage
+Once running:
 
-A simple web interface is provided in the `frontend` directory. You can open
-`frontend/index.html` directly in your browser, or serve the directory with
-FastAPI's `StaticFiles`:
+API available at: http://127.0.0.1:8000
 
-```python
+Swagger UI docs at: http://127.0.0.1:8000/docs
+
+Frontend Usage
+A simple web interface is provided in the frontend directory. You can either:
+
+Open frontend/index.html directly in your browser.
+
+Or serve it via FastAPI:
+
+python
+Copier
+Modifier
 from fastapi.staticfiles import StaticFiles
-app.mount('/', StaticFiles(directory='frontend', html=True), name='static')
-```
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+Then open: http://127.0.0.1:8000
 
-Start the backend server and visit `http://127.0.0.1:8000` to chat with the
-`/chat` endpoint.
+Health Check
+You can confirm the backend is running by executing:
+
+bash
+Copier
+Modifier
+curl http://127.0.0.1:8000/health
+Running Tests
+Execute unit tests with:
+
+bash
+Copier
+Modifier
+pytest
+yaml
+Copier
+Modifier
+
+---
+
+Tu peux copier/coller ça dans ton fichier `README.md`, puis :
+```bash
+git add README.md
+git commit -m "✅ README.md complet et corrigé"
+git push
