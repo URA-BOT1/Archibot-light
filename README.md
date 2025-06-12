@@ -1,10 +1,7 @@
-# Archibot-light Setup Guide
-
-## Prerequisites
-* Python 3.6 or higher
-* **Recommended:** create and activate a virtual environment
-
-```bash
+Archibot-light Setup Guide
+Prerequisites
+Python 3.6 or higher
+Recommended: create and activate a virtual environment
 python3 -m venv venv
 source venv/bin/activate   # on Windows: venv\Scripts\activate
 Installation
@@ -74,5 +71,4 @@ GROQ_API_KEY, TOGETHER_API_KEY – for external LLMs
 
 UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstash Redis
 
-Set these variables in your Railway project or local .env file before deploying.
-
+Set these variables in your Railway project or local
