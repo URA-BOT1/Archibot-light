@@ -15,11 +15,20 @@ def test_health():
         assert vector_db.count_documents() > 0
 
 def test_chat():
-    """/chat should return a response string and search results."""
+    """Test /chat endpoint returns a valid response and search results."""
     with create_client() as client:
         payload = {"message": "hello"}
         response = client.post("/chat", json=payload)
         assert response.status_code == 200
         data = response.json()
+
         assert "response" in data
-        assert isinstance(data.get("results"), list)
+        assert isinstance(data["response"], str)
+
+        assert "results" in data
+        assert isinstance(data["results"], list)
+
+        if data["results"]:
+            assert "text" in data["results"][0]
+            assert "score" in data["results"][0]
+
