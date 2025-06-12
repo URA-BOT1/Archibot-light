@@ -1,116 +1,46 @@
 # Archibot-light Setup Guide
 
-This repository contains the source code for **Archibot-light**. Below are
-instructions for running the project locally and deploying it to the cloud.
-
-## Local Development
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repo-url>
-   cd Archibot-light
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Copy `.env.example` to `.env`** and update the values as needed.
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Common variables include:
-
-   - `DATABASE_URL` &ndash; database connection string
-   - `OPENAI_API_KEY` &ndash; API key for OpenAI services
-
-4. **Run the backend locally**
-
-   ```bash
-   uvicorn backend.main:app --reload
-   ```
-
-   Once running, you can check the health endpoint:
-
-   ```bash
-   curl http://localhost:8000/health
-   ```
-
-## Deploying the Backend to Railway
-
-1. **Install the Railway CLI**
-
-   ```bash
-   pip install railway-cli
-   ```
-
-2. **Login and link your project**
-
-   ```bash
-   railway login
-   railway init
-   ```
-
-3. **Set environment variables** in the Railway dashboard or via CLI:
-
-   ```bash
-   railway variables set DATABASE_URL="..." OPENAI_API_KEY="..."
-   ```
-
-4. **Deploy**
-
-   ```bash
-   railway up
-   ```
-
-## Deploying the Frontend to Vercel
-
-1. **Install the Vercel CLI**
-
-   ```bash
-   pip install vercel-cli
-   ```
-
-2. **Login and link your project**
-
-   ```bash
-   vercel login
-   vercel link
-   ```
-
-3. **Add environment variables** through the Vercel dashboard or by running:
-
-   ```bash
-   vercel env add DATABASE_URL production
-   vercel env add OPENAI_API_KEY production
-   ```
-
-4. **Deploy**
-
-   ```bash
-   vercel --prod
-   ```
-
-## Sample Health Check
-
-After deploying, you can confirm the backend is running by executing:
-
-```bash
-curl https://<your-railway-app>.railway.app/health
-```
-
-A successful response confirms that the backend is up and responding.
-
-## Running Tests
-
-Execute unit tests with `pytest`:
-
-```bash
-pytest
-```
-
+Prérequis
+Python 3 (version 3.6 ou supérieure) doit être installé.
+(Optionnel, recommandé) Créez un environnement virtuel Python pour isoler les dépendances du projet. Par exemple :
+bash
+Copier
+Modifier
+python3 -m venv venv
+source venv/bin/activate   # sous Windows : venv\Scripts\activate
+Le module venv de Python permet de créer un environnement virtuel (commandée de la forme python -m venv <chemin>)
+docs.python.org
+.
+Installation
+Option 1 (script) : exécutez le script d’installation fourni dans le dépôt :
+bash
+Copier
+Modifier
+./install.sh
+Ce script installe automatiquement les dépendances nécessaires (via pip).
+Option 2 (pip) : installez manuellement les dépendances avec pip :
+bash
+Copier
+Modifier
+pip install -r requirements.txt
+La commande pip install -r requirements.txt installe toutes les bibliothèques listées dans ce fichier
+pip.pypa.io
+.
+Exécution
+Option 1 (script) : lancez le script d’exécution :
+bash
+Copier
+Modifier
+./run.sh
+Ce script démarre le serveur web (il utilise généralement Uvicorn en arrière-plan).
+Option 2 (Uvicorn) : démarrez manuellement le serveur FastAPI avec Uvicorn :
+bash
+Copier
+Modifier
+uvicorn backend.main:app --reload
+Cette commande lance le serveur ASGI en important l’application depuis backend/main.py. L’option --reload active le rechargement automatique du code en cas de modifications. Ce mode de lancement correspond à l’exemple documenté (uvicorn main:app --reload) dans la documentation FastAPI
+tutorialspoint.com
+.
+Le serveur écoute par défaut sur 127.0.0.1:8000. Une fois lancé, l’API est accessible sur http://127.0.0.1:8000 et la documentation interactive Swagger est disponible sur http://127.0.0.1:8000/docs
+tutorialspoint.com
+.
