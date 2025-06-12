@@ -5,9 +5,9 @@ Recommended: create and activate a virtual environment
 python3 -m venv venv
 source venv/bin/activate   # on Windows: venv\Scripts\activate
 Installation
-Install the dependencies from backend/requirements.txt:
+Install the dependencies from `requirements.txt`:
 ```bash
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 Running the Backend
 Start the FastAPI server with Uvicorn:
