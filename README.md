@@ -17,6 +17,10 @@ uvicorn backend.main:app --reload
 This command launches the ASGI server and imports the app from backend/main.py.
 The --reload option enables auto-reload on file changes.
 
+By default the backend uses OpenAI for language generation. If the
+`OPENAI_API_KEY` variable is missing, it will try Groq first and then
+Together.ai provided their keys are set.
+
 Once running:
 
 API available at: http://127.0.0.1:8000
@@ -53,9 +57,11 @@ An example configuration is provided in `.env.example`.
 
 PORT – port for the server (default: 8000)
 
-OPENAI_API_KEY – API key for optional OpenAI integration
+OPENAI_API_KEY – API key for OpenAI
 
-GROQ_API_KEY, TOGETHER_API_KEY – for external LLMs
+GROQ_API_KEY, TOGETHER_API_KEY – keys for external LLMs
+  When no OpenAI key is provided, the backend will try Groq first and
+  then Together.ai if their keys are present.
 
 UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstash Redis
 
