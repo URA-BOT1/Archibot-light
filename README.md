@@ -2,8 +2,7 @@
 
 Chatbot IA spécialisé en architecture et urbanisme avec système RAG-LLM intégré
 
-Afficher l'image
-📋 Description
+
 Archibot-light est un assistant intelligent conçu pour les professionnels de l'architecture et de l'urbanisme. Il utilise la technologie RAG (Retrieval-Augmented Generation) combinée aux LLM pour analyser vos documents et répondre précisément à vos questions techniques.
 ✨ Fonctionnalités
 
