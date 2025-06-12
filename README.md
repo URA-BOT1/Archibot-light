@@ -1,100 +1,93 @@
-Archibot-light Setup Guide
-Prerequisites
-Python 3.6 or higher
-Recommended: create and activate a virtual environment
-python3 -m venv venv
-source venv/bin/activate   # on Windows: venv\Scripts\activate
-Installation
-Install the dependencies from `requirements.txt`:
-```bash
-pip install -r requirements.txt
-```
-Running the Backend
-Start the FastAPI server with Uvicorn:
-```bash
-uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080}
-```
-This command binds the server to all network interfaces and reads the port
-from the `PORT` environment variable (default `8080`). Add `--reload` during
-development to enable auto-reload of code changes.
+# 🧠 Archibot-light — Chatbot IA RAG-LLM
 
-By default the backend uses OpenAI for language generation. If the
-`OPENAI_API_KEY` variable is missing, it will try Groq first and then
-Together.ai provided their keys are set.
+Assistant intelligent pour l’architecture et l’urbanisme.  
+Capable d'ingérer vos documents et de répondre à vos questions grâce à un système de **RAG** (Retrieval-Augmented Generation) et des **LLM** comme GPT ou Groq.
 
-Once running:
+---
 
-API available at: http://127.0.0.1:8080
+## 🚀 Fonctionnalités
 
-Swagger UI docs at: http://127.0.0.1:8080/docs
-You can override the port by setting the `PORT` environment variable.
+✅ IA conversationnelle spécialisée  
+✅ Endpoint `/chat` intelligent (LLM + Redis)  
+✅ Endpoint `/health` pour vérifier le statut  
+✅ Prêt à déployer sur **Railway** (backend + Redis)  
+✅ Frontend web minimal intégré (`StaticFiles`)
 
-Frontend Usage
-A simple web interface is provided in the frontend directory.
+---
 
-You can either:
+## ⚙️ Déploiement (Railway recommandé)
 
-Open frontend/index.html directly in your browser
+### 🧱 Build settings Railway
 
-Or serve it via FastAPI with:
-```python
-from fastapi.staticfiles import StaticFiles
-app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
-```
-Then open http://127.0.0.1:8080 to interact with the /chat endpoint.
+- **Builder** : `Nixpacks` *(ou Railway Build bêta)*
+- **Build command** :
+  ```bash
+  pip install -r backend/requirements.txt
+Start command :
 
-If the frontend and backend are deployed separately, set the backend's
-URL for the JavaScript client. Define a `BACKEND_URL` environment
-variable during your build or include a script tag before `app.js` that
-sets `window.BACKEND_URL`:
+bash
+Copier
+Modifier
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+🔐 Variables d’environnement à définir
+Clé	Exemple / Source
+PORT	8000 (géré automatiquement par Railway)
+REDIS_URL	redis://:<pass>@<host>.railway.internal:6379 (via Redis > Settings)
+GROQ_API_KEY	(facultatif, pour moteur Groq)
+OPENAI_API_KEY	(facultatif, pour moteur OpenAI)
+TOGETHER_API_KEY	(optionnel)
 
-```html
-<script>
-  window.BACKEND_URL = 'https://your-backend.example.com';
-</script>
-```
+🧪 Tester les endpoints
+➤ Vérifier le serveur :
+bash
+Copier
+Modifier
+curl https://<ton-app>.railway.app/health
+# ↪︎ {"status": "ok"}
+➤ Parler au bot :
+bash
+Copier
+Modifier
+curl -X POST https://<ton-app>.railway.app/chat \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Quelle hauteur maximale en zone U ?"}'
+🛠 Arborescence minimale
+bash
+Copier
+Modifier
+backend/
+  ├── main.py            # App FastAPI
+  ├── requirements.txt   # Dépendances
+frontend/
+  └── index.html         # Interface web (optionnelle)
+🧠 Ce projet est fait pour :
+Les développeurs back souhaitant intégrer des LLM dans un vrai use case
 
-Health Check
-You can confirm the backend is running by executing:
-```bash
-curl http://127.0.0.1:8080/health
-```
-Running Tests
-Run unit tests using:
-```bash
-pytest
-```
-Environment Variables
-The application relies on several environment variables when deployed.
-An example configuration is provided in `.env`.
+Les architectes/urbanistes qui veulent automatiser la veille réglementaire
 
-PORT – port for the server (default: 8080)
+Toute personne qui veut tester un chatbot RAG simple et auto-hébergeable
 
-OPENAI_API_KEY – API key for OpenAI
+📦 À venir (TODO)
+Upload de fichiers
 
-GROQ_API_KEY, TOGETHER_API_KEY – keys for external LLMs
-  When no OpenAI key is provided, the backend will try Groq first and
-  then Together.ai if their keys are present.
+Vectorisation des documents
+
+Authentification
+
+Interface UI plus complète
+
+🤝 Contribuer
+Fork, clone, propose un PR — ou contacte-moi pour en discuter.
+
+yaml
+Copier
+Modifier
+
+---
+
+Tu veux que je te le commit direct dans ton repo avec un lien `Deploy on Railway` et badge de build ?
 
 
-BACKEND_URL – base URL for the chat backend when the frontend is served separately
 
-Set these variables in your Railway project or local environment using a `.env` file or by exporting them in your shell.
 
-Deployment on Railway
----------------------
 
-The project can be deployed on [Railway](https://railway.app) using the
-Nixpacks builder.
-
-1. Install the Railway CLI: `npm i -g @railway/cli`
-2. Run `railway init` in the repository to create a project.
-3. Configure your environment variables in Railway.
-4. Deploy with:
-
-   ```bash
-   railway up
-   ```
-
-The included `railway.toml` ensures Nixpacks builds the app and starts it with
-`uvicorn backend.main:app --host 0.0.0.0 --port $PORT`.
