@@ -74,7 +74,6 @@ GROQ_API_KEY, TOGETHER_API_KEY – keys for external LLMs
   When no OpenAI key is provided, the backend will try Groq first and
   then Together.ai if their keys are present.
 
-UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN – credentials if using Upstash Redis
 
 BACKEND_URL – base URL for the chat backend when the frontend is served separately
 
