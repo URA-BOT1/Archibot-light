@@ -7,20 +7,65 @@
 ```bash
 python3 -m venv venv
 source venv/bin/activate   # on Windows: venv\Scripts\activate
-```
+Installation
+Install the dependencies from backend/requirements.txt:
 
-## Installation
-Install the dependencies from `backend/requirements.txt`:
-
-```bash
+bash
+Copier
+Modifier
 pip install -r backend/requirements.txt
-```
-
-## Running
+Running the Backend
 Start the FastAPI server with Uvicorn:
 
-```bash
+bash
+Copier
+Modifier
 uvicorn backend.main:app --reload
-```
+This command launches the ASGI server and imports the app from backend/main.py.
+The --reload option auto-reloads on file changes.
 
-The API is available at http://127.0.0.1:8000 and the interactive docs at http://127.0.0.1:8000/docs
+Once running:
+
+API available at: http://127.0.0.1:8000
+
+Swagger UI docs at: http://127.0.0.1:8000/docs
+
+Frontend Usage
+A simple web interface is provided in the frontend directory. You can either:
+
+Open frontend/index.html directly in your browser.
+
+Or serve it via FastAPI:
+
+python
+Copier
+Modifier
+from fastapi.staticfiles import StaticFiles
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
+Then open: http://127.0.0.1:8000
+
+Health Check
+You can confirm the backend is running by executing:
+
+bash
+Copier
+Modifier
+curl http://127.0.0.1:8000/health
+Running Tests
+Execute unit tests with:
+
+bash
+Copier
+Modifier
+pytest
+yaml
+Copier
+Modifier
+
+---
+
+Tu peux copier/coller ça dans ton fichier `README.md`, puis :
+```bash
+git add README.md
+git commit -m "✅ README.md complet et corrigé"
+git push

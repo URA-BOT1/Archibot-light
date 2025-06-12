@@ -3,26 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>Archibot</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Archibot</h1>
-    <div>
+    <header>Archibot</header>
+    <div id="chat-box"></div>
+    <div id="input-area">
         <input type="text" id="message" placeholder="Ask something" />
-        <button onclick="send()">Send</button>
+        <button id="send-btn">Send</button>
     </div>
-    <pre id="response"></pre>
-
-    <script>
-    async function send() {
-        const msg = document.getElementById('message').value;
-        const res = await fetch('/chat', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({message: msg})
-        });
-        const data = await res.json();
-        document.getElementById('response').textContent = data.response;
-    }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
