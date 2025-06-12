@@ -8,7 +8,16 @@ from backend.services.llm import RobustLLMClient
 from backend.services.embedding import load_embedding_model
 from backend.services.vector_store import LightVectorDB
 
-app = FastAPI()
+from contextlib import asynccontextmanager
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    _load_initial_embeddings()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 llm_client = RobustLLMClient()
 embedding_model = load_embedding_model()
@@ -29,9 +38,7 @@ def _load_initial_embeddings() -> None:
     vector_db.add_documents(texts, embeddings)
 
 
-@app.on_event("startup")
-def startup_event():
-    _load_initial_embeddings()
+
 
 
 class ChatRequest(BaseModel):
