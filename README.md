@@ -44,3 +44,15 @@ tutorialspoint.com
 Le serveur écoute par défaut sur 127.0.0.1:8000. Une fois lancé, l’API est accessible sur http://127.0.0.1:8000 et la documentation interactive Swagger est disponible sur http://127.0.0.1:8000/docs
 tutorialspoint.com
 .
+
+## Environment variables
+
+The application relies on several environment variables when deployed. An example configuration is provided in `.env.example`.
+
+- `PORT` – port for the server (default `8080`).
+- `REDIS_URL` – address of the Redis instance used by the backend.
+- `OPENAI_API_KEY` – API key for the optional OpenAI integration.
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` – credentials for Upstash Redis.
+- `GROQ_API_KEY` and `TOGETHER_API_KEY` – additional model provider keys.
+
+Define these variables in your Railway project or a local `.env` file before deployment.
