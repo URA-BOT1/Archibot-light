@@ -44,3 +44,6 @@ tutorialspoint.com
 Le serveur écoute par défaut sur 127.0.0.1:8000. Une fois lancé, l’API est accessible sur http://127.0.0.1:8000 et la documentation interactive Swagger est disponible sur http://127.0.0.1:8000/docs
 tutorialspoint.com
 .
+
+## Frontend
+Pour utiliser l'interface web simplifiee, ouvrez `frontend/index.html` dans votre navigateur une fois le serveur demarre.
