@@ -24,9 +24,10 @@ Together.ai provided their keys are set.
 
 Once running:
 
-API available at: http://127.0.0.1:8000
+API available at: http://127.0.0.1:8080
 
-Swagger UI docs at: http://127.0.0.1:8000/docs
+Swagger UI docs at: http://127.0.0.1:8080/docs
+You can override the port by setting the `PORT` environment variable.
 
 Frontend Usage
 A simple web interface is provided in the frontend directory.
@@ -40,7 +41,7 @@ Or serve it via FastAPI with:
 from fastapi.staticfiles import StaticFiles
 app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
 ```
-Then open http://127.0.0.1:8000 to interact with the /chat endpoint.
+Then open http://127.0.0.1:8080 to interact with the /chat endpoint.
 
 If the frontend and backend are deployed separately, set the backend's
 URL for the JavaScript client. Define a `BACKEND_URL` environment
@@ -56,7 +57,7 @@ sets `window.BACKEND_URL`:
 Health Check
 You can confirm the backend is running by executing:
 ```bash
-curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8080/health
 ```
 Running Tests
 Run unit tests using:
