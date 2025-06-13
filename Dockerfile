@@ -1,15 +1,16 @@
 FROM python:3.11-slim
 
-# Install dependencies
 WORKDIR /app
-COPY requirements.txt .
-RUN python -m pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy and install requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy all application code
 COPY . .
 
-# Expose runtime port
-ARG PORT=8000
-EXPOSE ${PORT}
+# Railway will set PORT
+EXPOSE ${PORT:-8000}
 
-CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"]
+# Start the application
+CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
