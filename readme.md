@@ -99,14 +99,13 @@ graph TD
     A[👤 Utilisateur] --> B[🌐 Interface Web]
     B --> C[🚀 FastAPI Backend]
     C --> D[🧠 LLM Engine]
-    C --> E[💾 Redis Cache]
+    C -.-> E[💾 Redis Cache (planifié)]
     D --> F[📚 Documents RAG]
 ```
 
 ## 📋 **Prérequis**
 
 - **Python 3.8+**
-- **Redis** (pour le cache)
 - **Clé API** (OpenAI, Groq, ou Together)
 
 ## 🛠️ **Installation locale**
@@ -137,7 +136,7 @@ uvicorn backend.main:app --reload
 | `OPENAI_API_KEY` | Clé API OpenAI | ✅ | `sk-...` |
 | `GROQ_API_KEY` | Clé API Groq | ⚠️ | `gsk_...` |
 | `TOGETHER_API_KEY` | Clé API Together | ⚠️ | `...` |
-| `REDIS_URL` | URL Redis | ❌ | Auto |
+| `REDIS_URL` | URL Redis (optionnel, cache futur) | ❌ | Auto |
 | `ALLOWED_ORIGINS` | Origines CORS autorisées (séparées par des virgules) | ❌ | `https://your-domain.com` |
 
 ### Commandes de build
@@ -224,7 +223,7 @@ archibot-light/
 Le système utilise :
 - **🔍 Recherche vectorielle** pour trouver les documents pertinents
 - **🧠 LLM** pour générer une réponse contextuelle
-- **💾 Cache Redis** pour optimiser les performances
+- **💾 Cache Redis (prévu)** pour optimiser les performances
 
 ## 🚧 **Roadmap**
 
