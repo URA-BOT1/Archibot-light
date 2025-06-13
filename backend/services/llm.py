@@ -1,4 +1,5 @@
 import os
+import logging
 
 try:
     import openai
@@ -6,6 +7,7 @@ except ImportError:  # pragma: no cover
     openai = None
 
 import httpx
+from fastapi import HTTPException
 
 
 class RobustLLMClient:
@@ -38,20 +40,29 @@ class RobustLLMClient:
         data = resp.json()
         return data["choices"][0]["message"]["content"]
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, raise_http: bool = False) -> str:
         if openai is not None and self.openai_key:
             try:
                 return self._call_openai(prompt)
             except Exception as exc:  # pragma: no cover
-                return f"Error: {exc}"
+                logging.exception("OpenAI request failed: %s", exc)
+                if raise_http:
+                    raise HTTPException(status_code=500, detail="LLM request failed")
+                return "LLM request failed"
         if self.groq_key:
             try:
                 return self._call_httpx(self.groq_url, self.groq_key, prompt)
             except Exception as exc:  # pragma: no cover
-                return f"Error: {exc}"
+                logging.exception("Groq request failed: %s", exc)
+                if raise_http:
+                    raise HTTPException(status_code=500, detail="LLM request failed")
+                return "LLM request failed"
         if self.together_key:
             try:
                 return self._call_httpx(self.together_url, self.together_key, prompt)
             except Exception as exc:  # pragma: no cover
-                return f"Error: {exc}"
+                logging.exception("Together request failed: %s", exc)
+                if raise_http:
+                    raise HTTPException(status_code=500, detail="LLM request failed")
+                return "LLM request failed"
         return "No LLM API key configured."
