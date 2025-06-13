@@ -1,17 +1,15 @@
-const historyEl = document.getElementById('chat-box'); // ou 'history' selon ton HTML
+const historyEl = document.getElementById('chat-box');
 
 function appendMessage(text, type) {
     const div = document.createElement('div');
-    div.className = `message ${type}`; // type = 'user' ou 'bot'
+    div.className = `message ${type}`;
     div.textContent = text;
     historyEl.appendChild(div);
     historyEl.scrollTop = historyEl.scrollHeight;
 }
 
-const backendUrl =
-    (typeof process !== 'undefined' && process.env && process.env.BACKEND_URL) ||
-    window.BACKEND_URL ||
-    '';
+// URL backend - fonctionne en local et sur Railway
+const backendUrl = window.location.origin;
 
 async function send() {
     const input = document.getElementById('message');
@@ -34,10 +32,8 @@ async function send() {
     }
 }
 
-// Gestion du bouton d'envoi
 document.getElementById('send-button').addEventListener('click', send);
 
-// Envoi avec la touche Entrée
 document.getElementById('message').addEventListener('keyup', (e) => {
     if (e.key === 'Enter') send();
 });
