@@ -3,6 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 import json
 from pathlib import Path
 
