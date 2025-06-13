@@ -155,6 +155,8 @@ pip install -r requirements.txt
 uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ```
 
+> **Note:** mettez à jour `allow_origins` dans `backend/main.py` avec votre domaine de production (ex. `https://votre-domaine.com`) pour activer le CORS.
+
 ## 🧪 **Tests des endpoints**
 
 ### Test de santé

@@ -24,7 +24,7 @@ app = FastAPI(lifespan=lifespan)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En prod: spécifier les domaines autorisés
+    allow_origins=["https://votre-domaine.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
