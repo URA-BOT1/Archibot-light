@@ -23,17 +23,11 @@
 
 ### 3️⃣ **Settings obligatoires**
 
-**📁 Root Directory :** `/backend` (important !)
+**📁 Root Directory :** `/` (racine du repo)
 
-**⚙️ Build Command :**
-```
-pip install -r requirements.txt
-```
+**⚙️ Build Command :** *(la construction utilise le `Dockerfile`)*
 
-**🚀 Start Command :**
-```
-uvicorn main:app --host 0.0.0.0 --port $PORT
-```
+**🚀 Start Command :** *(défini dans le `Dockerfile`)*
 
 ### 4️⃣ **Variables (Settings > Variables)**
 
