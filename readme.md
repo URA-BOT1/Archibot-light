@@ -5,7 +5,7 @@
   
   **Assistant IA spécialisé en architecture et urbanisme**
   
-  [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template)
+  [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/archibot-light)
   ![Status](https://img.shields.io/badge/status-ready-brightgreen)
   ![Version](https://img.shields.io/badge/version-1.0-blue)
 </div>
@@ -14,7 +14,7 @@
 
 ## 🚀 **Démarrage ultra-rapide** *(2 minutes chrono)*
 
-### 1️⃣ **Cliquez** ➡️ [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template)
+### 1️⃣ **Cliquez** ➡️ [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/archibot-light)
 
 ### 2️⃣ **Connect GitHub**
 - "Deploy from GitHub repo" 
@@ -45,7 +45,7 @@ uvicorn main:app --host 0.0.0.0 --port $PORT
 ### 5️⃣ **Deploy & Test**
 - "Redeploy" 
 - Attendez le build (2-3 min)
-- URL auto-générée : `https://xxx.railway.app`
+- URL auto-générée : `https://your-app.railway.app`
 
 ### 4️⃣ **Exemples de questions**
 <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
@@ -119,7 +119,7 @@ graph TD
 
 ```bash
 # 1. Cloner le projet
-git clone https://github.com/votre-username/archibot-light.git
+git clone https://github.com/URA-BOT1/Archibot-light.git
 cd archibot-light
 
 # 2. Installer les dépendances
@@ -155,19 +155,19 @@ pip install -r requirements.txt
 uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ```
 
-> **Note:** mettez à jour `allow_origins` dans `backend/main.py` avec votre domaine de production (ex. `https://votre-domaine.com`) pour activer le CORS.
+> **Note:** mettez à jour `allow_origins` dans `backend/main.py` avec votre domaine de production (ex. `https://your-domain.com`) pour activer le CORS.
 
 ## 🧪 **Tests des endpoints**
 
 ### Test de santé
 ```bash
-curl https://votre-app.railway.app/health
+curl https://your-app.railway.app/health
 # Réponse: {"status": "ok"}
 ```
 
 ### Test du chat
 ```bash
-curl -X POST https://votre-app.railway.app/chat \
+curl -X POST https://your-app.railway.app/chat \
   -H "Content-Type: application/json" \
   -d '{
     "prompt": "Quelle est la hauteur maximale autorisée en zone urbaine ?"
@@ -250,10 +250,10 @@ Le système utilise :
 
 **Envie d'améliorer Archibot ?**
 
-<a href="https://github.com/votre-username/archibot-light/fork">
+<a href="https://github.com/URA-BOT1/Archibot-light/fork">
   <img src="https://img.shields.io/badge/Fork-le%20projet-blue?style=for-the-badge&logo=github" />
 </a>
-<a href="https://github.com/votre-username/archibot-light/issues">
+<a href="https://github.com/URA-BOT1/Archibot-light/issues">
   <img src="https://img.shields.io/badge/Signaler-un%20bug-red?style=for-the-badge&logo=github" />
 </a>
 
@@ -265,9 +265,9 @@ Le système utilise :
 
 | 🐛 **Bug** | 💡 **Idée** | 💬 **Chat** |
 |------------|-------------|-------------|
-| [GitHub Issues](https://github.com/votre-username/archibot-light/issues) | [Discussions](https://github.com/votre-username/archibot-light/discussions) | [Discord](https://discord.gg/votre-serveur) |
+| [GitHub Issues](https://github.com/URA-BOT1/Archibot-light/issues) | [Discussions](https://github.com/URA-BOT1/Archibot-light/discussions) | [Discord](https://discord.gg/archibot) |
 
-📧 **Email :** votre-email@example.com
+📧 **Email :** contact@example.com
 
 </div>
 
@@ -276,6 +276,6 @@ Le système utilise :
 <div align="center">
   <p>Fait avec ❤️ pour la communauté architecture & tech</p>
   
-  ![GitHub stars](https://img.shields.io/github/stars/votre-username/archibot-light?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/votre-username/archibot-light?style=social)
+  ![GitHub stars](https://img.shields.io/github/stars/URA-BOT1/archibot-light?style=social)
+  ![GitHub forks](https://img.shields.io/github/forks/URA-BOT1/archibot-light?style=social)
 </div>
