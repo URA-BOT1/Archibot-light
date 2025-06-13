@@ -157,7 +157,7 @@ uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ### Test de santé
 ```bash
 curl https://your-app.railway.app/health
-# Réponse: {"status": "ok"}
+# Réponse: {"status": "ok", "version": "1.0.0", "documents": 42}
 ```
 
 ### Test du chat
@@ -215,7 +215,7 @@ archibot-light/
 {
   "status": "ok",
   "version": "1.0.0",
-  "uptime": "2h 15m"
+  "documents": 42
 }
 ```
 

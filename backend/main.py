@@ -74,9 +74,17 @@ def root():
     return FileResponse('frontend/index.html')
 
 
+from backend import __version__
+
+
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    """Return basic health info."""
+    return {
+        "status": "ok",
+        "version": __version__,
+        "documents": vector_db.count_documents(),
+    }
 
 
 @app.post("/chat")
