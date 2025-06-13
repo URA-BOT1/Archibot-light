@@ -118,6 +118,9 @@ cd archibot-light
 # 2. Installer les dépendances
 python -m pip install --no-cache-dir -r requirements.txt
 
+> **Note :** la bibliothèque Python `openai` est indispensable si vous comptez
+> utiliser l'API OpenAI (elle est incluse dans `requirements.txt`).
+
 # 3. Variables d'environnement
 export OPENAI_API_KEY="votre-cle-api"
 export GROQ_API_KEY="votre-cle-groq"
