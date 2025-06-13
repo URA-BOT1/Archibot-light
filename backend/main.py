@@ -85,7 +85,9 @@ def chat(req: ChatRequest):
     if hasattr(query_embedding, "tolist"):
         query_embedding = query_embedding.tolist()
     results = vector_db.similarity_search(query_embedding)
-    response = llm_client.generate(req.message)
+    context = " ".join(text for text, _ in results)
+    prompt = f"Context: {context} Question: {req.message}"
+    response = llm_client.generate(prompt)
     return {
         "response": response,
         "results": [{"text": text, "score": score} for text, score in results],
