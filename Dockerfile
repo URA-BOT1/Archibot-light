@@ -3,17 +3,18 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install requirements
+# Copy and install requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source
+# Copy all files
 COPY . .
 
-# Fix path issue
+# Set Python path
 ENV PYTHONPATH=/app
 
+# Railway uses this port variable
 EXPOSE ${PORT:-8000}
 
-# Use correct path to main
-CMD ["python", "-m", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start the app with correct module path
+CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
