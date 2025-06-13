@@ -117,7 +117,7 @@ git clone https://github.com/URA-BOT1/Archibot-light.git
 cd archibot-light
 
 # 2. Installer les dépendances
-pip install -r requirements.txt
+python -m pip install --no-cache-dir -r requirements.txt
 
 # 3. Variables d'environnement
 export OPENAI_API_KEY="votre-cle-api"
@@ -143,7 +143,7 @@ uvicorn backend.main:app --reload
 
 ```yaml
 # Build Command
-pip install -r requirements.txt
+python -m pip install --no-cache-dir -r requirements.txt
 
 # Start Command  
 uvicorn backend.main:app --host 0.0.0.0 --port $PORT
