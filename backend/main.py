@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+import os
 
 import logging
 
@@ -26,9 +27,15 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # CORS middleware
+_origins_env = os.getenv("ALLOWED_ORIGINS")
+if _origins_env:
+    _allowed_origins = [o.strip() for o in _origins_env.split(",")]
+else:  # development default
+    _allowed_origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://your-domain.com"],
+    allow_origins=_allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
