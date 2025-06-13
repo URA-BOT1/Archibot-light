@@ -165,7 +165,7 @@ curl https://your-app.railway.app/health
 curl -X POST https://your-app.railway.app/chat \
   -H "Content-Type: application/json" \
   -d '{
-    "prompt": "Quelle est la hauteur maximale autorisée en zone urbaine ?"
+    "message": "Quelle est la hauteur maximale autorisée en zone urbaine ?"
   }'
 ```
 
@@ -195,7 +195,7 @@ archibot-light/
 ### POST `/chat`
 ```json
 {
-  "prompt": "Votre question",
+  "message": "Votre question",
   "context": "Contexte optionnel",
   "model": "gpt-4" // optionnel
 }
