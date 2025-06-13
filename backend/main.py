@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 import json
@@ -19,6 +21,18 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # En prod: spécifier les domaines autorisés
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Servir les fichiers statiques du frontend
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
 llm_client = RobustLLMClient()
 embedding_model = load_embedding_model()
 vector_db = LightVectorDB()
@@ -38,11 +52,15 @@ def _load_initial_embeddings() -> None:
     vector_db.add_documents(texts, embeddings)
 
 
-
-
-
 class ChatRequest(BaseModel):
     message: str
+
+
+@app.get("/")
+def root():
+    """Serve the frontend"""
+    from fastapi.responses import FileResponse
+    return FileResponse('frontend/index.html')
 
 
 @app.get("/health")
