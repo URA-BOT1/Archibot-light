@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+vector_store.db
+*.py[cod]
+.env
+*.log
+tests/
+docs/
