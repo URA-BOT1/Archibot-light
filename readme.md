@@ -138,6 +138,7 @@ uvicorn backend.main:app --reload
 | `GROQ_API_KEY` | Clé API Groq | ⚠️ | `gsk_...` |
 | `TOGETHER_API_KEY` | Clé API Together | ⚠️ | `...` |
 | `REDIS_URL` | URL Redis | ❌ | Auto |
+| `ALLOWED_ORIGINS` | Origines CORS autorisées (séparées par des virgules) | ❌ | `https://your-domain.com` |
 
 ### Commandes de build
 
@@ -149,7 +150,7 @@ python -m pip install --no-cache-dir -r requirements.txt
 uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ```
 
-> **Note:** mettez à jour `allow_origins` dans `backend/main.py` avec votre domaine de production (ex. `https://your-domain.com`) pour activer le CORS.
+> **Note:** utilisez la variable `ALLOWED_ORIGINS` pour configurer le CORS (ex. `https://your-domain.com`).
 
 ## 🧪 **Tests des endpoints**
 
