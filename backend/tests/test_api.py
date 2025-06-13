@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from backend.main import app, vector_db
+from backend import __version__
 
 
 def create_client():
@@ -11,7 +12,11 @@ def test_health():
     with create_client() as client:
         response = client.get("/health")
         assert response.status_code == 200
-        assert response.json() == {"status": "ok"}
+        assert response.json() == {
+            "status": "ok",
+            "version": __version__,
+            "documents": vector_db.count_documents(),
+        }
         assert vector_db.count_documents() > 0
 
 def test_chat(monkeypatch):
